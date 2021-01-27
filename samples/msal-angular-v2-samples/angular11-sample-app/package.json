@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@angular/animations": "^11.0.9",
     "@angular/cdk": "^11.1.0",
     "@angular/common": "^11.0.9",
@@ -24,6 +25,21 @@
     "@azure/msal-angular": "^2.0.0-alpha.3",
     "@azure/msal-browser": "^2.10.0",
     "core-js": "^3.8.3",
+=======
+    "@angular/animations": "~11.0.4",
+    "@angular/cdk": "^11.0.2",
+    "@angular/common": "~11.0.4",
+    "@angular/compiler": "~11.0.4",
+    "@angular/core": "~11.0.4",
+    "@angular/forms": "~11.0.4",
+    "@angular/material": "^11.0.2",
+    "@angular/platform-browser": "~11.0.4",
+    "@angular/platform-browser-dynamic": "~11.0.4",
+    "@angular/router": "~11.0.4",
+    "@azure/msal-angular": "^2.0.0-alpha.3",
+    "@azure/msal-browser": "^2.10.0",
+    "core-js": "^3.8.0",
+>>>>>>> 3104ba876553f3cbae5d24624375e71ba895ca15
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.10.2"
