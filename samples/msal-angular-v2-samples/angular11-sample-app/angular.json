@@ -66,7 +66,10 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular11-sample-app:build"
+            "browserTarget": "angular11-sample-app:build",
+            "ssl": true,
+            "sslKey": "cert/localhost.key",
+            "sslCert": "cert/localhost.crt"
           },
           "configurations": {
             "production": {

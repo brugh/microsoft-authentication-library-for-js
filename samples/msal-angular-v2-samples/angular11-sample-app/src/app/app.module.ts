@@ -21,9 +21,11 @@ const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigato
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth: {
-      clientId: '6226576d-37e9-49eb-b201-ec1eeb0029b6',
-      redirectUri: 'http://localhost:4200',
-      postLogoutRedirectUri: 'http://localhost:4200'
+      clientId: '0c7de0ec-997a-454f-8baf-f380c7f40a70',
+      // authority: 'https://login.microsoftonline.com/af358673-a848-4404-aa81-e35b360f4d61'
+      authority: 'https://login.microsoftonline.com/common/'
+      // redirectUri: 'https://localhost:4200',
+      // postLogoutRedirectUri: 'https://localhost:4200'
     },
     cache: {
       cacheLocation: BrowserCacheLocation.LocalStorage,
@@ -33,9 +35,12 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 }
 
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
-  const protectedResourceMap = new Map<string, Array<string>>();
-  protectedResourceMap.set('https://graph.microsoft.com/v1.0/me', ['user.read']);
-
+  // const protectedResourceMap = new Map<string, Array<string>>();
+  // protectedResourceMap.set('https://graph.microsoft.com/v1.0/me', ['user.read']);
+  const protectedResourceMap = new Map<string, Array<string>>([
+    ["https://graph.microsoft.com/v1.0/*", ["Files.ReadWrite.All", "Sites.Read.All", "OpenId", "Profile", "User.Read"]],
+    ["api://0c7de0ec-997a-454f-8baf-f380c7f40a70/access_as_user", ["access_as_user"]],
+  ]);
   return {
     interactionType: InteractionType.Redirect,
     protectedResourceMap
@@ -67,23 +72,10 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: MsalInterceptor,
-      multi: true
-    },
-    {
-      provide: MSAL_INSTANCE,
-      useFactory: MSALInstanceFactory
-    },
-    {
-      provide: MSAL_GUARD_CONFIG,
-      useFactory: MSALGuardConfigFactory
-    },
-    {
-      provide: MSAL_INTERCEPTOR_CONFIG,
-      useFactory: MSALInterceptorConfigFactory
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: MsalInterceptor, multi: true },
+    { provide: MSAL_INSTANCE,     useFactory: MSALInstanceFactory },
+    { provide: MSAL_GUARD_CONFIG, useFactory: MSALGuardConfigFactory },
+    { provide: MSAL_INTERCEPTOR_CONFIG, useFactory: MSALInterceptorConfigFactory },
     MsalService,
     MsalGuard,
     MsalBroadcastService

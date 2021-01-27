@@ -47,6 +47,7 @@ const isIframe = window !== window.parent && !window.opener; // Remove this line
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     useHash: true,
+    enableTracing: true,
     // Don't perform initial navigation in iframes
     initialNavigation: !isIframe ? 'enabled' : 'disabled' // Remove this line to use Angular Universal
   })],
